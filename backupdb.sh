@@ -1,16 +1,16 @@
 #!/bin/bash
 
-export PATH=/bin:/usr/bin:/usr/local/bin
 source .config
-#
+export PATH=/bin:/usr/bin:/usr/local/bin
+################################################################
 APPNAME = "scripts"
 TODAY=$(date +"%d%m%Y%H%I%S")
 
 ################################################################
 ################## Update below values  ########################
-DB_BACKUP_PATH="${HOME}/${APPNAME}/storage"
+DB_BACKUP_PATH="${HOME}/${APPNAME}/backups"
 BACKUP_RETAIN_DAYS=1
-#################################################################
+################################################################
 
 # get a list of databases
 databases=$(mysql --host=${MYSQL_HOST} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} \
