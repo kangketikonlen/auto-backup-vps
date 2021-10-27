@@ -1,15 +1,14 @@
 #!/bin/bash
 
 export PATH=/bin:/usr/bin:/usr/local/bin
+source .config
+#
+APPNAME = "scripts"
 TODAY=$(date +"%d%m%Y%H%I%S")
 
 ################################################################
 ################## Update below values  ########################
-DB_BACKUP_PATH='/home/akasakaryu/backups/database'
-MYSQL_HOST='localhost'
-MYSQL_PORT='3306'
-MYSQL_USER='fath_dev'
-MYSQL_PASSWORD='fathtech123'
+DB_BACKUP_PATH="${HOME}/${APPNAME}/storage"
 BACKUP_RETAIN_DAYS=1
 #################################################################
 
