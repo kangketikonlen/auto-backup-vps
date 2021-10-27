@@ -3,7 +3,7 @@
 source .config
 export PATH=/bin:/usr/bin:/usr/local/bin
 ################################################################
-APPNAME = "scripts"
+APPNAME="scripts"
 TODAY=$(date +"%d%m%Y%H%I%S")
 
 ################################################################
