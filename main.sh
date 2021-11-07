@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .config
+source $HOME/scripts/.config
 export PATH=/bin:/usr/bin:/usr/local/bin
 ################################################################
 APPNAME="scripts"
