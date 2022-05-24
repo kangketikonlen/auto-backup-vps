@@ -1,0 +1,15 @@
+#!/bin/bash
+################################################################
+# Copy file ini dengan dengan nama .config			   	   	   #
+# cp -r config.example .config			   	   	   			   #
+################################################################
+# Isi dengan IP host mysql
+MYSQL_HOST=''
+# Isi dengan port mysql
+MYSQL_PORT=''
+# Isi dengan username mysql
+MYSQL_USER=''
+# Isi dengan password mysql
+MYSQL_PASSWORD=''
+# Isi dengan path untuk backup
+LOCAL_PATH=''
