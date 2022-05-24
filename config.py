@@ -8,8 +8,12 @@ SCOPES = [
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Drive Sync'
 # Set path to the uploaded folder is located
-FULL_PATH = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'backups'))
-DIR_NAME = 'backups'
+FULL_PATH = os.path.abspath(
+    os.path.join(
+        os.path.dirname( __file__ ), '..', 'backups', socket.gethostname()
+    )
+)
+DIR_NAME = socket.gethostname()
 # Set Mime type for uploaded folder
 GOOGLE_MIME_TYPES = {
     'application/vnd.google-apps.document':
@@ -23,5 +27,3 @@ GOOGLE_MIME_TYPES = {
 EXCLUDED_FILES = [
     ".DS_Store"
 ]
-
-print(socket.gethostname())
