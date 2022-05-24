@@ -6,6 +6,7 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if ! command -v python3.9 &>/dev/null; then
+	echo "Python 3.9 is not installed."
 	# Check linux distribution.
 	. /etc/lsb-release
 	if [ "$DISTRIB_ID" == "Ubuntu" ]; then
@@ -22,6 +23,7 @@ if ! command -v python3.9 &>/dev/null; then
 		rm -rf get-pip.py
 	else
 		echo "Only Ubuntu is supported"
+		exit 1
 	fi
 else
 	echo "Python 3.9 is already installed"
@@ -81,3 +83,6 @@ if [ "$DISTRIB_ID" == "Ubuntu" ]; then
 else
 	echo "Cronjob only Ubuntu is supported"
 fi
+
+# Start bash script start.sh
+bash $SCRIPT_DIR/start.sh
