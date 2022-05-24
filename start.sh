@@ -1,7 +1,13 @@
 #!/bin/bash
 
 source $(pwd)/.config
-export PATH=/bin:/usr/bin:/usr/local/bin
+if [ -d $LOCAL_PATH/env/ ]; then
+    source "$LOCAL_PATH/env/bin/activate"
+else
+    $(python3.9 -m venv "$LOCAL_PATH/env")
+    source "$LOCAL_PATH/env/bin/activate"
+fi
+# export PATH=/bin:/usr/bin:/usr/local/bin
 ################################################################
 TODAY=$(date +"%d%m%Y%H%I%S")
 
@@ -56,18 +62,10 @@ find ${DB_BACKUP_PATH} -name "*.zip" -type f -mtime +${BACKUP_RETAIN_DAYS} -exec
 
 cd $LOCAL_PATH
 
-if [ -d $LOCAL_PATH/env/ ]; then
-    source "$LOCAL_PATH/activate_env.sh"
-    $(python --version)
-    $(pip -r install requirements.txt)
-    $(python $LOCAL_PATH/main.py)
-else
-    $(python3.9 -m venv "$LOCAL_PATH/env")
-    source "$LOCAL_PATH/activate_env.sh"
-    $(python --version)
-    $(pip -r install requirements.txt)
-    $(python $LOCAL_PATH/main.py)
-fi
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+python $LOCAL_PATH/main.py
+# $(type -a pip)
 
 echo -------------------------------------
 echo Finished!
