@@ -27,5 +27,3 @@ GOOGLE_MIME_TYPES = {
 EXCLUDED_FILES = [
     ".DS_Store"
 ]
-
-print(FULL_PATH)

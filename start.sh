@@ -63,7 +63,7 @@ find ${DB_BACKUP_PATH} -name "*.zip" -type f -mtime +${BACKUP_RETAIN_DAYS} -exec
 cd $LOCAL_PATH
 
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements.txt --quiet
 python $LOCAL_PATH/main.py
 
 echo -------------------------------------
