@@ -47,7 +47,7 @@ for DATABASE_NAME in $databases; do
 done
 
 # compress backup folder
-cd ${DB_BACKUP_PATH} && zip -r ${TODAY}.zip ${TODAY}
+cd ${DB_BACKUP_PATH} && zip -r -qq ${TODAY}.zip ${TODAY}
 
 # check compressing status
 if [ $? -eq 0 ]; then
