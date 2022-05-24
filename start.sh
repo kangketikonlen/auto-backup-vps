@@ -58,7 +58,11 @@ if [ -d $LOCAL_PATH/env/ ]; then
     source "$LOCAL_PATH/env/bin/activate"
     $(python)
 else
-    $(python3.9 -m venv "$LOCAL_PATH/env") && source "$LOCAL_PATH/env/bin/activate" && $(python $LOCAL_PATH/main.py)
+    $(python3.9 -m venv "$LOCAL_PATH/env")
+    source "$LOCAL_PATH/env/bin/activate"
+    $(python --version)
+    $(pip -r install requirements.txt)
+    $(python $LOCAL_PATH/main.py)
 fi
 
 echo -------------------------------------
