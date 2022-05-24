@@ -65,7 +65,6 @@ cd $LOCAL_PATH
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 python $LOCAL_PATH/main.py
-# $(type -a pip)
 
 echo -------------------------------------
 echo Finished!

@@ -10,7 +10,7 @@ APPLICATION_NAME = 'Drive Sync'
 # Set path to the uploaded folder is located
 FULL_PATH = os.path.abspath(
     os.path.join(
-        os.path.dirname( __file__ ), '..', 'backups', socket.gethostname()
+        os.path.dirname( __file__ ), 'backups', socket.gethostname()
     )
 )
 DIR_NAME = socket.gethostname()
@@ -27,3 +27,5 @@ GOOGLE_MIME_TYPES = {
 EXCLUDED_FILES = [
     ".DS_Store"
 ]
+
+print(FULL_PATH)
