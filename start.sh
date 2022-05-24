@@ -54,14 +54,11 @@ fi
 ##### Remove backups older than {BACKUP_RETAIN_DAYS} days  #####
 find ${DB_BACKUP_PATH} -name "*.zip" -type f -mtime +${BACKUP_RETAIN_DAYS} -exec rm -f {} \;
 
-activate() {
-    source "$LOCAL_PATH/env/bin/activate"
-}
-
 if [ -d $LOCAL_PATH/env/ ]; then
-    activate && pip install -r requirements.txt
+    source "$LOCAL_PATH/env/bin/activate"
+    $(python)
 else
-    python3.9 -m venv env && source env/bin/activate && python main.py
+    $(python3.9 -m venv "$LOCAL_PATH/env") && source "$LOCAL_PATH/env/bin/activate" && $(python $LOCAL_PATH/main.py)
 fi
 
 echo -------------------------------------
