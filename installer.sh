@@ -37,38 +37,61 @@ if [ ! -f .config ]; then
 	echo "File .config not found"
 	# Create .config file
 	touch .config
-
 	# Ask for mysql host
 	read -p "Enter mysql host: " MYSQL_HOST
 	# Write MYQL_HOST to .config
 	echo "MYSQL_HOST=$MYSQL_HOST" >>.config
-
 	# Ask for mysql port
 	read -p "Enter mysql port: " MYSQL_PORT
 	# Write MYSQL_PORT to .config
 	echo "MYSQL_PORT=$MYSQL_PORT" >>.config
-
 	# Ask for mysql user
 	read -p "Enter mysql user: " MYSQL_USER
 	# Write MYSQL_USER to .config
 	echo "MYSQL_USER=$MYSQL_USER" >>.config
-
 	# Ask for mysql password
 	read -p "Enter mysql password: " MYSQL_PASSWORD
 	# Write MYSQL_PASSWORD to .config
 	echo "MYSQL_PASSWORD=$MYSQL_PASSWORD" >>.config
-
 	# Write LOCAL_PATH to .config
 	echo "LOCAL_PATH=$(pwd)" >>.config
 else
 	echo "File .config found"
 fi
 
-# Get .credentials folder from remote server
-scp -r -P 14045 akasakaryu@server.fathtech.co.id:/home/akasakaryu/.credentials ~/
+# Ask user if he wants to automatically get credentials from another server
+read -p "Do you want to get credentials from another server? [y/n]: " GET_CREDENTIALS
+# If user wants to get credentials from another server
+if [ "$GET_CREDENTIALS" == "y" ]; then
+	# Ask user ssh port
+	read -p "Enter ssh port: " SSH_PORT
+	# Ask user ssh user
+	read -p "Enter ssh user: " SSH_USER
+	# Ask user ip/domain of server
+	read -p "Enter ip/domain of server: " SERVER_IP
+	# Ask user the directory of credentials
+	read -p "Enter the directory of credentials: " CREDENTIALS_DIR
+	# Get .credentials folder from remote server
+	scp -r -P $SSH_PORT $SSH_USER@$SERVER_IP:$CREDENTIALS_DIR ~/
+fi
 
-# Get client_secret.json from remote server
-scp -r -P 14045 akasakaryu@server.fathtech.co.id:/home/akasakaryu/scripts/client_secret.json .
+# ASk user if he wants to automatically get client_secret.json from another server
+read -p "Do you want to get client_secret.json from another server? [y/n]: " GET_CLIENT_SECRET
+# If user wants to get client_secret.json from another server
+if [ "$GET_CLIENT_SECRET" == "y" ]; then
+	# Change directory to SCRIPT_DIR
+	cd "$SCRIPT_DIR"
+	# Ask user ssh port
+	read -p "Enter ssh port: " SSH_PORT
+	# Ask user ssh user
+	read -p "Enter ssh user: " SSH_USER
+	# Ask user ip/domain of server
+	read -p "Enter ip/domain of server: " SERVER_IP
+	# Ask user the directory of client_secret.json
+	read -p "Enter the directory of client_secret.json: " CLIENT_SECRET_DIR
+	# Get client_secret.json from remote server
+	scp -r -P $SSH_PORT $SSH_USER@$SERVER_IP:$CLIENT_SECRET_DIR .
+fi
 
 # Check is Ubuntu
 . /etc/lsb-release
@@ -76,7 +99,7 @@ if [ "$DISTRIB_ID" == "Ubuntu" ]; then
 	# Write out current crontab
 	crontab -l >mycron
 	# echo new cron into cron file
-	echo "0 5 * * * bash /home/akasakaryu/auto-backup-vps/start.sh > /home/akasakaryu/auto-backup-vps/logs/pagi.log" >>mycron
+	echo "0 5 * * * bash $SCRIPT_DIR/start.sh > $SCRIPT_DIR/logs/pagi.log" >>mycron
 	# install new cron file
 	crontab mycron
 	rm mycron
@@ -84,5 +107,12 @@ else
 	echo "Cronjob only Ubuntu is supported"
 fi
 
-# Start bash script start.sh
-bash $SCRIPT_DIR/start.sh
+# Ask user if he wants to start the application now
+read -p "Do you want to start the application now? [y/n]: " START_NOW
+# If user wants to start the application now
+if [ "$START_NOW" == "y" ]; then
+	# Change directory to SCRIPT_DIR
+	cd "$SCRIPT_DIR"
+	# Start the application
+	bash start.sh
+fi
