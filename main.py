@@ -268,7 +268,7 @@ def main():
                 file_mime = [f['mimeType'] for f in items
                              if f['name'] == drive_file['name']][0]
                 sleep(1)
-                console.log(f"[bold yellow]Update file on remote {drive_file['name']} {FULL_PATH}")
+                console.log(f"[bold yellow]Update file on remote {drive_file['name']}")
                 media_body = MediaFileUpload(file_dir, mimetype=file_mime)
                 service.files().update(
                     fileId=file_id,
