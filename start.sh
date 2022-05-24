@@ -58,6 +58,7 @@ cd $LOCAL_PATH
 
 if [ -d $LOCAL_PATH/env/ ]; then
     source "$LOCAL_PATH/activate_env.sh"
+    $(python --version)
     $(pip -r install requirements.txt)
     $(python $LOCAL_PATH/main.py)
 else
