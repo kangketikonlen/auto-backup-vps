@@ -55,13 +55,12 @@ fi
 find ${DB_BACKUP_PATH} -name "*.zip" -type f -mtime +${BACKUP_RETAIN_DAYS} -exec rm -f {} \;
 
 if [ -d $LOCAL_PATH/env/ ]; then
-    source "$LOCAL_PATH/env/bin/activate"
-    $(python --version)
+    source "$LOCAL_PATH/activate_env.sh"
     $(pip -r install requirements.txt)
     $(python $LOCAL_PATH/main.py)
 else
     $(python3.9 -m venv "$LOCAL_PATH/env")
-    source "$LOCAL_PATH/env/bin/activate"
+    source "$LOCAL_PATH/activate_env.sh"
     $(python --version)
     $(pip -r install requirements.txt)
     $(python $LOCAL_PATH/main.py)
