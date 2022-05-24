@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $HOME/scripts/.config
+source $(pwd)/.config
 export PATH=/bin:/usr/bin:/usr/local/bin
 ################################################################
 APPNAME="scripts"
@@ -8,13 +8,15 @@ TODAY=$(date +"%d%m%Y%H%I%S")
 
 ################################################################
 ################## Update below values  ########################
-DB_BACKUP_PATH="${HOME}/${APPNAME}/backups"
+DB_BACKUP_PATH="$(pwd)/backups/$(uname -n)"
 BACKUP_RETAIN_DAYS=1
 ################################################################
 
+# Create unique folder
+mkdir -p $(pwd)/backups/$(uname -n)
+
 # get a list of databases
-databases=$(mysql --host=${MYSQL_HOST} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} \
-    -e "SHOW DATABASES;" | tr -d "| " | grep -v Database)
+databases=$(mysql --host=${MYSQL_HOST} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} -e "SHOW DATABASES;" | tr -d "| " | grep -v Database)
 
 # Create folder
 mkdir ${DB_BACKUP_PATH}/${TODAY}
