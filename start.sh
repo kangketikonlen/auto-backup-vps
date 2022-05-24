@@ -54,6 +54,8 @@ fi
 ##### Remove backups older than {BACKUP_RETAIN_DAYS} days  #####
 find ${DB_BACKUP_PATH} -name "*.zip" -type f -mtime +${BACKUP_RETAIN_DAYS} -exec rm -f {} \;
 
+cd $LOCAL_PATH
+
 if [ -d $LOCAL_PATH/env/ ]; then
     source "$LOCAL_PATH/activate_env.sh"
     $(pip -r install requirements.txt)
