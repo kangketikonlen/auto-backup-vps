@@ -1,6 +1,14 @@
 #!/bin/bash
 
-source $LOCAL_PATH/.config
+if [ -d "$(pwd)/auto-backup-vps/.config" ]; then
+    source "$(pwd)/auto-backup-vps/.config"
+
+elif [ -d "$(pwd)/scripts/.config" ]; then
+    source "$(pwd)/scripts/.config"
+else
+    echo "Apps root folder must be in auto-backup-vps or scripts folder run install.sh or rename folder"
+fi
+
 if [ -d $LOCAL_PATH/env/ ]; then
     source "$LOCAL_PATH/env/bin/activate"
 else
