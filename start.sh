@@ -2,11 +2,10 @@
 
 if [ -d "$(pwd)/auto-backup-vps/.config" ]; then
     source "$(pwd)/auto-backup-vps/.config"
-
 elif [ -d "$(pwd)/scripts/.config" ]; then
     source "$(pwd)/scripts/.config"
 else
-    echo "Apps root folder must be in auto-backup-vps or scripts folder run install.sh or rename folder"
+    echo "Apps root folder must be in $(pwd)/auto-backup-vps or $(pwd)/scripts folder run install.sh or rename folder"
 fi
 
 if [ -d $LOCAL_PATH/env/ ]; then
@@ -18,9 +17,6 @@ fi
 # export PATH=/bin:/usr/bin:/usr/local/bin
 ################################################################
 TODAY=$(date +"%d%m%Y%H%I%S")
-
-################################################################
-################## Update below values  ########################
 DB_BACKUP_PATH="$LOCAL_PATH/backups/$(uname -n)"
 BACKUP_RETAIN_DAYS=1
 ################################################################
