@@ -2,21 +2,24 @@
 
 if [ -f "$(pwd)/scripts/.config" ]; then
     source "$(pwd)/scripts/.config"
+
     if [ -d $LOCAL_PATH/env/ ]; then
         source "$LOCAL_PATH/env/bin/activate"
     else
         $(python3.9 -m venv "$LOCAL_PATH/env")
         source "$LOCAL_PATH/env/bin/activate"
     fi
-    # export PATH=/bin:/usr/bin:/usr/local/bin
+
     ################################################################
     TODAY=$(date +"%d%m%Y%H%I%S")
     DB_BACKUP_PATH="$LOCAL_PATH/backups/$(uname -n)"
     BACKUP_RETAIN_DAYS=1
     ################################################################
 
-    # Create unique folder
-    mkdir -p $LOCAL_PATH/backups/$(uname -n)
+    # Check if $LOCAL_PATH/backups/$(uname -n) directory is not exists
+    if [ ! -d "$LOCAL_PATH/backups/$(uname -n)" ]; then
+        mkdir -p $LOCAL_PATH/backups/$(uname -n)
+    fi
 
     # get a list of databases
     databases=$(mysql --host=${MYSQL_HOST} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} -e "SHOW DATABASES;" | tr -d "| " | grep -v Database)
