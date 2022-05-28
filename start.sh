@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -d "$(pwd)/scripts/.config" ]; then
+if [ -f "$(pwd)/scripts/.config" ]; then
     source "$(pwd)/scripts/.config"
     if [ -d $LOCAL_PATH/env/ ]; then
         source "$LOCAL_PATH/env/bin/activate"
