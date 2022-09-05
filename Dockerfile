@@ -1,13 +1,16 @@
 FROM ubuntu:22.04
 
 WORKDIR /app
+COPY ./ /app
 
 ENV REGION Asia/Jakarta
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common \
 	wget \
-	tzdata
+	tzdata \
+	apt-utils \
+	mariadb-client
 
 RUN ln -fs /usr/share/zoneinfo/${REGION} /etc/localtime && \
 	dpkg-reconfigure -f noninteractive tzdata
@@ -23,6 +26,8 @@ ENV PATH="/env/bin:$PATH"
 
 RUN wget -c https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py && rm -rf get-pip.py
+RUN python -m pip install --upgrade pip
+RUN pip install -r requirements.txt --quiet
 
 RUN touch .config
 RUN echo "MYSQL_HOST=$MYSQL_HOST" >>.config
@@ -30,4 +35,3 @@ RUN echo "MYSQL_PORT=$MYSQL_PORT" >>.config
 RUN echo "MYSQL_USER=$MYSQL_USER" >>.config
 RUN echo "MYSQL_PASSWORD=$MYSQL_PASSWORD" >>.config
 RUN echo "LOCAL_PATH=$(pwd)" >>.config
-RUN cat .config
