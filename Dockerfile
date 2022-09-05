@@ -1,10 +1,10 @@
 FROM python:3.9-buster
+
+RUN adduser --disabled-password --gecos "" abvps
+USER abvps
+
 WORKDIR /app
 COPY . ./
-
-RUN adduser --disabled-password --no-create-home --gecos "" abvps
-
-USER abvps
 
 RUN pip install --upgrade pip
 RUN python -m pip install --upgrade pip
