@@ -36,3 +36,5 @@ RUN echo "MYSQL_PORT=$MYSQL_PORT" >>.config
 RUN echo "MYSQL_USER=$MYSQL_USER" >>.config
 RUN echo "MYSQL_PASSWORD=$MYSQL_PASSWORD" >>.config
 RUN echo "LOCAL_PATH=$(pwd)" >>.config
+
+RUN bash start.sh
