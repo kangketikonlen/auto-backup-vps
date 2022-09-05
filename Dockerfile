@@ -5,12 +5,18 @@ COPY ./ /app
 
 ENV REGION Asia/Jakarta
 
+ENV MYSQL_HOST server.fathtech.co.id \
+	MYSQL_USER fath_dev \
+	MYSQL_PASSWORD fathtech123 \
+	MYSQL_PORT 3306
+
 RUN ln -fs /usr/share/zoneinfo/${REGION} /etc/localtime
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common \
 	wget \
 	apt-utils \
+	zip \
 	mariadb-client \
 	tzdata
 
