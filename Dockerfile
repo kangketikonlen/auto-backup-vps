@@ -5,6 +5,8 @@ COPY ./ /app
 
 ENV REGION Asia/Jakarta
 
+RUN ln -fs /usr/share/zoneinfo/${REGION} /etc/localtime
+
 RUN apt-get update
 RUN apt-get install -y software-properties-common \
 	wget \
@@ -12,8 +14,7 @@ RUN apt-get install -y software-properties-common \
 	mariadb-client \
 	tzdata
 
-RUN ln -fs /usr/share/zoneinfo/${REGION} /etc/localtime && \
-	dpkg-reconfigure -f noninteractive tzdata
+RUN dpkg-reconfigure -f noninteractive tzdata
 
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update
