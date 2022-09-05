@@ -68,9 +68,6 @@ if [ -f "$(pwd)/.config" ]; then
 
     # shellcheck disable=SC2164
     cd "$LOCAL_PATH"
-
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt --quiet
     python "$LOCAL_PATH"/main.py
 
     echo "-------------------------------------"
