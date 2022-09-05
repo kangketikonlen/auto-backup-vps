@@ -9,4 +9,4 @@ ENV PATH="/env/bin:$PATH"
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-RUN bash installer.sh
+RUN bash /app/installer.sh
