@@ -8,9 +8,9 @@ ENV REGION Asia/Jakarta
 RUN apt-get update
 RUN apt-get install -y software-properties-common \
 	wget \
-	tzdata \
 	apt-utils \
-	mariadb-client
+	mariadb-client \
+	tzdata
 
 RUN ln -fs /usr/share/zoneinfo/${REGION} /etc/localtime && \
 	dpkg-reconfigure -f noninteractive tzdata
