@@ -1,12 +1,4 @@
-FROM python:3.9-buster
+FROM ubuntu:22.04
 
-WORKDIR /app
-COPY . ./
-
-RUN python -m venv /env
-ENV PATH="/env/bin:$PATH"
-
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
-
-RUN bash /app/installer.sh
+COPY ./installer.sh /usr/local/bin
+RUN /usr/local/bin/installer.sh
