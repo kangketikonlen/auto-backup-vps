@@ -1,8 +1,14 @@
 FROM ubuntu:22.04
 
+ENV REGION Asia/Jakarta
+
 RUN apt-get update
 RUN apt-get install -y software-properties-common \
-	wget
+	wget \
+	tzdata
+
+RUN ln -fs /usr/share/zoneinfo/${REGION} /etc/localtime && \
+	dpkg-reconfigure -f noninteractive tzdata
 
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update
