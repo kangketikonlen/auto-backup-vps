@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+WORKDIR /app
+
 ENV REGION Asia/Jakarta
 
 RUN apt-get update
@@ -21,3 +23,11 @@ ENV PATH="/env/bin:$PATH"
 
 RUN wget -c https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py && rm -rf get-pip.py
+
+RUN touch .config
+RUN echo "MYSQL_HOST=$MYSQL_HOST" >>.config
+RUN echo "MYSQL_PORT=$MYSQL_PORT" >>.config
+RUN echo "MYSQL_USER=$MYSQL_USER" >>.config
+RUN echo "MYSQL_PASSWORD=$MYSQL_PASSWORD" >>.config
+RUN echo "LOCAL_PATH=$(pwd)" >>.config
+RUN cat .config
